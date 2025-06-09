@@ -2,7 +2,8 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_IMAGE = "leocrita/java-ecom-app"
+        DOCKER_IMAGE = "leocrita/java-ecom-app:latest"
+        K8S_DIR = "k8s"
     }
 
     stages {
@@ -34,5 +35,17 @@ pipeline {
                 }
             }
         }
+
+        stage('Deploy to EKS') {
+            steps {
+                sh '''
+                    aws eks update-kubeconfig --region eu-west-2 --name ecommerce-eks
+                    kubectl apply -f $K8S_DIR/deployment.yaml
+                    kubectl apply -f $K8S_DIR/service.yaml
+                    kubectl apply -f $K8S_DIR/ingress.yaml
+                '''
+            }
+        }
     }
 }
+
