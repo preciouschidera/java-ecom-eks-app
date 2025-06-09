@@ -40,9 +40,9 @@ pipeline {
             steps {
                 sh '''
                     aws eks update-kubeconfig --region eu-west-2 --name ecommerce-eks
-                    kubectl apply -f $K8S_DIR/deployment.yaml
-                    kubectl apply -f $K8S_DIR/service.yaml
-                    kubectl apply -f $K8S_DIR/ingress.yaml
+                    kubectl apply -f terraform/k8s/deployment.yaml
+                    kubectl apply -f terraform/k8s/service.yaml
+                    kubectl apply -f terraform/k8s/ingress.yaml
                 '''
             }
         }
