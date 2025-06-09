@@ -1,0 +1,9 @@
+.terraform/
+*.zip
+*.tar.gz
+*.jar
+*.bin
+*.exe
+terraform/awscliv2.zip
+terraform/.terraform/*
+
